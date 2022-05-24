@@ -9,5 +9,4 @@ public class TestePerinityApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TestePerinityApplication.class, args);
 	}
-
 }

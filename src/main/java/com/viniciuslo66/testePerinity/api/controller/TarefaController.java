@@ -23,11 +23,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping("/api/tarefas")
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class TarefaController {
 
   private final TarefaService service;

@@ -1,12 +1,14 @@
 package com.viniciuslo66.testePerinity.service.impl;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
 import com.viniciuslo66.testePerinity.error.RegraNegocioException;
 import com.viniciuslo66.testePerinity.model.Repository.TarefaRepository;
+import com.viniciuslo66.testePerinity.model.entity.Pessoa;
 import com.viniciuslo66.testePerinity.model.entity.Tarefa;
 import com.viniciuslo66.testePerinity.service.TarefaService;
 
@@ -102,6 +104,22 @@ public class TarefaServiceImpl implements TarefaService {
   @Override
   public Optional<Tarefa> obterPorId(Long id) {
     return repository.findById(id);
+  }
+
+  @Override
+  @Transactional(readOnly = true)
+  public Integer obterPrazoPorUsuario(Pessoa pessoa) {
+    List<Tarefa> tarefas = new ArrayList<>();
+    Integer horasTrabalhadas = 0; 
+
+    if (Objects.nonNull(pessoa)) {
+      tarefas = repository.findByPessoa(pessoa);
+      for (Tarefa tarefa : tarefas) {
+        horasTrabalhadas += tarefa.getDuracao();
+      }
+    }
+
+    return horasTrabalhadas;
   }
 
 }
